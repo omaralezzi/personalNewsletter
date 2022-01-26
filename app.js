@@ -4,6 +4,7 @@ const request = require("request");
 const https = require("https");
 
 const app = express();
+const PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -40,10 +41,11 @@ app.post("/", function (req,res) {
   const url = "https://us20.api.mailchimp.com/3.0/lists/770fef9d7c";
   const options = {
     method: "POST",
-    auth: "omar:34e7ad6dd98aba0057bcb9e5422127af-us20",
+    auth: "omar:SORRY I HAVE  TO HIDE IT-us20",
   };
 
   const requestTemp = https.request(url, options, function (response) {
+    console.log(response.statusCode);
     if (response.statusCode === 200) {
       res.sendFile(__dirname + '/success.html');
       console.log("Successfully subscribed");
@@ -77,9 +79,8 @@ app.post("/success", function (req, res) {
 
 
 
-app.listen(process.env.PORT || 3000 , () => {
-  console.log("listening on 3000");
+app.listen(PORT, () => {
+  console.log("Server is running on port " + PORT);
 });
 
-// API Key 34e7ad6dd98aba0057bcb9e5422127af-us20
-// List Id 770fef9d7c
+
